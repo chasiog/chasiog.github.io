@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日大乱斗-每日大乱斗玩法规则_英雄阵容搭配与对战技巧</title>
+<meta name="description" content="每日大乱斗主题站，梳理每日大乱斗的玩法规则、英雄阵容搭配思路、对战节奏与常见问题，帮助玩家快速理解每日大乱斗的核心循环与挑战要点。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Cpath d='M16 40 L28 20 L36 32 L44 18 L52 44 L40 44 L34 34 L28 44 Z' fill='%23f5b544'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#141821;
+  --ink-2:#2b3240;
+  --muted:#5d6675;
+  --line:#e3e1da;
+  --paper:#faf8f4;
+  --card:#ffffff;
+  --brand:#1d2330;
+  --gold:#e9a63a;
+  --gold-deep:#c9821f;
+  --red:#c8483a;
+  --teal:#2f7f74;
+  --radius:14px;
+  --maxw:1120px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3{margin:0;line-height:1.3;}
+p{margin:0 0 1em;}
+img,svg{display:block;max-width:100%;}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+/* header */
+.site-header{
+  position:sticky;top:0;z-index:30;
+  background:rgba(250,248,244,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{display:flex;align-items:center;gap:18px;min-height:66px;}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:.5px;color:var(--brand);white-space:nowrap;}
+.logo-mark{width:34px;height:34px;flex:0 0 34px;}
+.nav{margin-left:auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.nav a{
+  font-size:14.5px;color:var(--ink-2);padding:8px 12px;border-radius:999px;
+  transition:background .18s,color .18s;
+}
+.nav a:hover,.nav a:focus-visible{background:#efeade;color:#000;outline:none;}
+.nav a.cta{background:var(--brand);color:#fff;}
+.nav a.cta:hover,.nav a.cta:focus-visible{background:#000;color:#fff;}
+
+/* hero */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#1b2130 0%,#242c3d 52%,#2d3648 100%);
+  color:#f4f1ea;
+}
+.hero::after{
+  content:"";position:absolute;inset:auto -10% -40% auto;width:520px;height:520px;
+  background:radial-gradient(circle,rgba(233,166,58,.30),transparent 68%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:64px 0 58px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:2px;color:#f0c987;border:1px solid rgba(240,201,135,.4);padding:5px 12px;border-radius:999px;margin-bottom:20px;}
+.hero h1{font-size:clamp(30px,4.4vw,48px);font-weight:900;letter-spacing:1px;color:#fff;}
+.hero-sub{margin-top:16px;font-size:16px;color:#c9cfdb;max-width:33em;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-size:15px;font-weight:700;transition:transform .15s,background .18s,color .18s;}
+.btn-primary{background:var(--gold);color:#241a05;}
+.btn-primary:hover,.btn-primary:focus-visible{background:#f6b955;transform:translateY(-1px);outline:none;}
+.btn-ghost{border:1px solid rgba(255,255,255,.32);color:#f1eee6;}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:#fff;background:rgba(255,255,255,.08);outline:none;}
+.btn[data-download-placeholder="true"]{pointer-events:none;opacity:.92;}
+.hero-stats{display:flex;gap:30px;margin-top:36px;flex-wrap:wrap;}
+.hero-stats div span{display:block;font-size:12.5px;color:#9aa4b5;letter-spacing:.5px;}
+.hero-stats div strong{font-size:20px;color:#f5cf8b;font-weight:800;}
+.hero-art{position:relative;}
+.hero-art svg{width:100%;height:auto;filter:drop-shadow(0 18px 34px rgba(0,0,0,.42));}
+
+/* section base */
+section{padding:64px 0;}
+.sec-head{max-width:44em;margin-bottom:34px;}
+.sec-kicker{font-size:12.5px;letter-spacing:2.4px;color:var(--gold-deep);font-weight:800;margin-bottom:10px;}
+.sec-head h2{font-size:clamp(22px,2.6vw,30px);font-weight:900;color:var(--brand);}
+.sec-head p{margin-top:12px;color:var(--muted);font-size:15.5px;}
+
+/* rules cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px;transition:border-color .18s,box-shadow .18s;
+}
+.card:hover{border-color:#d3cbb8;box-shadow:0 10px 26px -20px rgba(20,24,33,.6);}
+.card-icon{width:42px;height:42px;border-radius:11px;background:#fbf1dc;display:grid;place-items:center;margin-bottom:16px;}
+.card h3{font-size:18px;font-weight:800;color:var(--brand);margin-bottom:8px;}
+.card p{font-size:14.8px;color:var(--muted);margin:0;}
+.card ul{margin:10px 0 0;padding-left:18px;font-size:14.6px;color:var(--muted);}
+.card li{margin-bottom:6px;}
+
+/* lineup */
+.lineup{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.lineup-inner{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:start;}
+.role-list{display:grid;gap:14px;margin-top:6px;}
+.role{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px 18px;border-radius:12px;background:var(--paper);border:1px solid var(--line);}
+.role-tag{font-size:12px;font-weight:800;letter-spacing:.5px;color:#fff;background:var(--teal);border-radius:6px;padding:3px 9px;white-space:nowrap;height:fit-content;}
+.role:nth-child(2) .role-tag{background:var(--gold-deep);}
+.role:nth-child(3) .role-tag{background:var(--red);}
+.role:nth-child(4) .role-tag{background:#4a5d8f;}
+.role h3{font-size:15.5px;font-weight:800;margin-bottom:4px;}
+.role p{font-size:14.4px;color:var(--muted);margin:0;}
+.quote-box{margin-top:24px;padding:20px 22px;border-left:3px solid var(--gold);background:#fdf8ee;border-radius:0 12px 12px 0;}
+.quote-box p{font-size:14.6px;color:var(--ink-2);margin:0;}
+
+/* rhythm table */
+.rhythm{background:#f4f1ea;}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;}
+table{width:100%;border-collapse:collapse;font-size:14.6px;min-width:560px;}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{background:#fbf8f1;font-weight:800;color:var(--brand);font-size:13.5px;letter-spacing:.4px;}
+tbody tr:last-child td{border-bottom:none;}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
+td{color:var(--muted);}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+details[open]{border-color:#d6cdb9;}
+summary{cursor:pointer;font-weight:800;font-size:15.4px;color:var(--brand);list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:"+";font-size:19px;color:var(--gold-deep);font-weight:400;line-height:1;}
+details[open] summary::after{content:"–";}
+details p{margin:12px 0 0;font-size:14.6px;color:var(--muted);}
+
+/* download */
+.dl{background:linear-gradient(150deg,#1b2130,#2c3446);color:#f2efe8;border-radius:18px;padding:44px 40px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;}
+.dl h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;color:#fff;}
+.dl p{color:#b9c1cf;font-size:14.8px;margin:10px 0 0;max-width:36em;}
+.dl .btn-primary{white-space:nowrap;}
+.dl-note{grid-column:1/-1;font-size:12.6px;color:#8d97a8;margin:0;border-top:1px solid rgba(255,255,255,.12);padding-top:16px;}
+
+/* footer */
+.site-footer{background:#141821;color:#a9b1bf;padding:46px 0 30px;font-size:14px;}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;font-size:16.5px;margin-bottom:12px;}
+.footer-top p{color:#8d97a8;font-size:13.8px;margin:0;}
+.footer-top h3{font-size:13.5px;color:#fff;letter-spacing:1px;margin-bottom:12px;font-weight:800;}
+.footer-top ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:13.8px;}
+.footer-top ul a:hover{color:#f5cf8b;}
+.footer-bottom{padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.8px;color:#79828f;}
+
+/* responsive */
+@media (max-width:920px){
+  .hero-inner{grid-template-columns:1fr;gap:32px;padding:46px 0 44px;}
+  .hero-art{max-width:420px;}
+  .lineup-inner{grid-template-columns:1fr;gap:30px;}
+  .grid-3{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  .dl{grid-template-columns:1fr;padding:34px 26px;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:680px){
+  .header-inner{flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:10px;}
+  .nav{width:100%;margin-left:0;gap:2px;}
+  .nav a{padding:7px 10px;font-size:13.6px;}
+  section{padding:46px 0;}
+  .hero-stats{gap:22px;margin-top:28px;}
+  .footer-top{grid-template-columns:1fr;gap:24px;}
+  .wrap{padding:0 18px;}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#top" aria-label="每日大乱斗首页">
+      <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1d2330"/>
+        <path d="M16 40 L28 20 L36 32 L44 18 L52 44 L40 44 L34 34 L28 44 Z" fill="#e9a63a"/>
+        <circle cx="48" cy="16" r="4" fill="#c8483a"/>
+      </svg>
+      每日大乱斗
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#rules">玩法规则</a>
+      <a href="#lineup">阵容搭配</a>
+      <a href="#rhythm">对战节奏</a>
+      <a href="#faq">常见问题</a>
+      <a class="cta" href="#download">获取入口</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">每日一局 · 快节奏对战</span>
+        <h1 id="hero-title">每日大乱斗</h1>
+        <p class="hero-sub">每日大乱斗是一款以短时长、强对抗为核心的对战玩法。每天开放一轮固定赛程，玩家在有限回合内挑选英雄、组合技能，用一套清晰的取舍思路完成当日挑战。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#rules">查看玩法规则</a>
+          <a class="btn btn-ghost" href="#lineup">阵容搭配思路</a>
+        </div>
+        <div class="hero-stats">
+          <div><span>单局时长</span><strong>约 10 分钟</strong></div>
+          <div><span>开放节奏</span><strong>每日轮换</strong></div>
+          <div><span>核心维度</span><strong>阵容 + 节奏</strong></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 440 340" role="presentation">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f5b955"/>
+              <stop offset="1" stop-color="#c9821f"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3a4459"/>
+              <stop offset="1" stop-color="#222a39"/>
+            </linearGradient>
+          </defs>
+          <rect x="30" y="46" width="380" height="248" rx="20" fill="url(#g2)" stroke="rgba(255,255,255,.14)"/>
+          <circle cx="220" cy="150" r="66" fill="none" stroke="rgba(245,185,85,.35)" stroke-width="2"/>
+          <circle cx="220" cy="150" r="46" fill="none" stroke="rgba(245,185,85,.55)" stroke-width="2" stroke-dasharray="6 8"/>
+          <path d="M188 176 L214 118 L232 150 L250 112 L268 180 L240 180 L228 156 L214 180 Z" fill="url(#g1)"/>
+          <rect x="62" y="222" width="94" height="12" rx="6" fill="rgba(255,255,255,.16)"/>
+          <rect x="62" y="244" width="60" height="12" rx="6" fill="rgba(255,255,255,.10)"/>
+          <rect x="286" y="222" width="94" height="12" rx="6" fill="rgba(255,255,255,.16)"/>
+          <rect x="320" y="244" width="60" height="12" rx="6" fill="rgba(255,255,255,.10)"/>
+          <circle cx="86" cy="92" r="10" fill="#c8483a"/>
+          <circle cx="356" cy="92" r="10" fill="#2f7f74"/>
+          <path d="M86 102 L86 132 M356 102 L356 132" stroke="rgba(255,255,255,.22)" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" aria-labelledby="rules-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">玩法规则</div>
+        <h2 id="rules-title">每日大乱斗的三条主线</h2>
+        <p>每日大乱斗的规则并不复杂，难点在于把三条主线同时顾好：赛程怎么开、回合怎么算、资源怎么投。下面按访问者最常问的顺序展开。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9821f" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h3>赛程与开放</h3>
+          <p>每日大乱斗按天轮换主题赛程，每轮有固定的开放与结算节点，当日的对手与规则随轮次调整。</p>
+          <ul>
+            <li>每天进入新的一轮，前一轮记录保留</li>
+            <li>单局约 10 分钟，适合碎片时间</li>
+            <li>轮换内容以当日赛程说明为准</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9821f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          </div>
+          <h3>回合与胜负</h3>
+          <p>对局以回合推进，双方在同一套规则下出手，先达成胜利条件的一方结束战斗。回合内行动顺序与技能冷却共同决定输出窗口。</p>
+          <ul>
+            <li>回合内可观察对手的出手倾向</li>
+            <li>胜负判定以系统结算为准</li>
+            <li>失败不消耗当日剩余挑战次数以外资源</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9821f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4.2-3.4 7.2-8 8-4.6-.8-8-3.8-8-8V7z"/></svg>
+          </div>
+          <h3>资源与成长</h3>
+          <p>对局产出的资源用于强化当日阵容。短期收益优先于长期囤积，这是每日大乱斗与其他长线玩法的关键差别。</p>
+          <ul>
+            <li>优先升级高频使用的核心英雄</li>
+            <li>资源集中在 2 至 3 个位置更稳</li>
+            <li>轮换日重新评估投入方向</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineup" class="lineup" aria-labelledby="lineup-title">
+    <div class="wrap lineup-inner">
+      <div>
+        <div class="sec-head">
+          <div class="sec-kicker">阵容搭配</div>
+          <h2 id="lineup-title">先定位置，再谈英雄</h2>
+          <p>每日大乱斗的阵容不是越贵越好，而是越匹配当日赛程越好。把队伍拆成四个位置来思考，选择会清楚很多。</p>
+        </div>
+        <div class="quote-box">
+          <p>一个实用的判断标准：如果阵容在第三回合之前无法形成一次有效压制，就说明前排或控制位选错了，而不是输出不够。</p>
+        </div>
+      </div>
+      <div class="role-list">
+        <div class="role">
+          <span class="role-tag">前排</span>
+          <div>
+            <h3>承伤与卡位</h3>
+            <p>承担第一波伤害，为后排争取出手时间。前排不必追求输出，稳定性优先。</p>
+          </div>
+        </div>
+        <div class="role">
+          <span class="role-tag">控制</span>
+          <div>
+            <h3>打断与节奏</h3>
+            <p>负责打断对手的关键技能，让己方输出窗口更完整。控制位是每日大乱斗里回报最高的位置之一。</p>
+          </div>
+        </div>
+        <div class="role">
+          <span class="role-tag">输出</span>
+          <div>
+            <h3>集中资源点</h3>
+            <p>资源主要投向这里。选择与当日赛程加成方向一致的输出英雄，收益差异明显。</p>
+          </div>
+        </div>
+        <div class="role">
+          <span class="role-tag">辅助</span>
+          <div>
+            <h3>续航与补位</h3>
+            <p>提供治疗或增益，也可在阵容缺位时临时补上短板。辅助位的作用体现在长回合对局中。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rhythm" class="rhythm" aria-labelledby="rhythm-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">对战节奏</div>
+        <h2 id="rhythm-title">一局每日大乱斗怎么打</h2>
+        <p>把一局拆成三个阶段，每个阶段的决策重点不同。下表按顺序列出常见的处理方式，便于对照复盘。</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">阶段</th><th scope="col">主要目标</th><th scope="col">常见处理</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>开局</td>
+              <td>确认真赛程与对手倾向</td>
+              <td>先看当日规则说明和对手阵容构成，再决定主攻方向，不急于投入资源。</td>
+            </tr>
+            <tr>
+              <td>中盘</td>
+              <td>建立一次有效压制</td>
+              <td>用控制位打断对手核心技能，把输出资源集中到同一回合，避免分散消耗。</td>
+            </tr>
+            <tr>
+              <td>收尾</td>
+              <td>稳定结算并记录</td>
+              <td>优势时不冒进，保留关键技能应对反打；结束后记录本局阵容与失误点。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">常见问题</div>
+        <h2 id="faq-title">关于每日大乱斗的高频疑问</h2>
+        <p>以下问题来自访问者最常见的关注点，涉及参与门槛、每日重置与阵容调整。</p>
+      </div>
+      <div class="faq-grid">
+        <details open>
+          <summary>每日大乱斗需要每天上线吗？</summary>
+          <p>每日大乱斗按天推进赛程，当天不参与不会影响后续轮次的开放，但会错过当日的挑战记录与对应产出。是否每天参与取决于个人节奏。</p>
+        </details>
+        <details>
+          <summary>阵容每天都要重新搭配吗？</summary>
+          <p>不必完全重搭。赛程轮换时先确认规则变化，若加成方向与现有阵容一致，只需微调一两个位置即可，频繁大改反而会分散资源。</p>
+        </details>
+        <details>
+          <summary>新手适合从哪个位置入手？</summary>
+          <p>建议先练前排和控制位。这两个位置对英雄池要求较低，容错空间更大，也能让新手更快理解每日大乱斗的回合节奏。</p>
+        </details>
+        <details>
+          <summary>输掉对局会影响什么？</summary>
+          <p>对局失败主要影响当日战绩记录，不会清空已获得的成长资源。把失败局当作复盘素材，比反复重开更有效率。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="dl">
+        <div>
+          <h2 id="download-title">获取每日大乱斗主题资料</h2>
+          <p>整理版的玩法要点与阵容搭配速查，包含规则主线、位置分工与对战节奏对照表，适合初次接触每日大乱斗的玩家快速上手。</p>
+        </div>
+        <a class="btn btn-primary" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+        <p class="dl-note">资料内容以本文所列范围为准，后续版本更新将同步调整赛程与阵容说明。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#e9a63a"/>
+            <path d="M16 40 L28 20 L36 32 L44 18 L52 44 L40 44 L34 34 L28 44 Z" fill="#1d2330"/>
+          </svg>
+          每日大乱斗
+        </div>
+        <p>每日大乱斗主题首页，围绕玩法规则、阵容搭配与对战节奏提供结构化的阅读内容，帮助访问者用更短的时间理解每日大乱斗的核心循环。</p>
+      </div>
+      <div>
+        <h3>内容导航</h3>
+        <ul>
+          <li><a href="#rules">玩法规则</a></li>
+          <li><a href="#lineup">阵容搭配</a></li>
+          <li><a href="#rhythm">对战节奏</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>阅读提示</h3>
+        <ul>
+          <li>赛程与规则以当日说明为准</li>
+          <li>阵容建议适用于常规对局</li>
+          <li>资料入口见页面底部下载区</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>每日大乱斗 · 主题内容首页</span>
+      <span>页面内容用于玩法说明与阅读参考</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
